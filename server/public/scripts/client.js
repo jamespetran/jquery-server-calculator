@@ -13,13 +13,14 @@ function onReady() {
       $('.operator').on('click', operatorSelect);
       $('.submit').on('click', onSubmit);
       $('.clear').on('click', onClear);
+      $('#historyButton').on('click', getHistory);
 
 }
 
 function operatorSelect() {
       operator = $(this).text(); //set operator to the text of the button, +,-,X,÷
-      $('#calculator button').removeClass("selected"); //blank out all blacked out buttons
-      $(this).addClass("selected"); // set button to black to show it is selected
+      $('#calculator button').removeClass("selected"); //clear selected operator
+      $(this).addClass("selected"); // set (this) button to black to show it is selected
       // console.log(operator); // log the selected operator to check that its right
       if (operator === "+") {
             plus();
@@ -41,16 +42,18 @@ function onSubmit() {
 
       
       //code that submits the inputs & operator to server
-      //POST
+      //POST submission
+      // endpoint: /calculate
 
             //code that refreshes DOM by showing the
             //calculated value and historical equations
+      getHistory();
 }
 
 function onClear() {
       console.log('clearing');
       //code that clears the inputs, operator, and history
-      $('#calculator button').removeClass("selected"); //blank out all blacked out buttons
+      $('#calculator button').removeClass("selected"); //clear selected operator
       $('#firstNumber').val('');
       $('#secondNumber').val('');
       operator = '';
@@ -60,7 +63,13 @@ function onClear() {
       $('#history').text(''); // blanking out the historical display of equations
 
 
-      //POST
+      //POST to clear history
+      // endpoint: /clear
+      
+            //code that refreshes DOM by showing the
+            //calculated value and historical equations
+      getHistory();
+
 }
 
 function plus() {
@@ -82,4 +91,12 @@ function divide() {
       let operator="divide";
       console.log(operator);
       submission.operator = operator;
+}
+
+function getHistory() {
+      console.log('get history');
+      //ajax that GETs history from server
+      // endpoint: /history
+      //and appends to DOM
+
 }

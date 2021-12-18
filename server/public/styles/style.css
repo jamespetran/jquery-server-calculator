@@ -2,7 +2,16 @@
       font-size: larger;
 }
 
+h1 {
+      padding: 20px;
+      text-align: center;
+}
 .selected {
       background-color: black;
       color: white;
+} 
+div {
+      padding: 20px;
+      align-items: center;
+      text-align: center;
 }
