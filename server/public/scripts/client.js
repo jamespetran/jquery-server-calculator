@@ -6,6 +6,9 @@ let operator = '';
 function onReady() {
       console.log('jq');
       $('.operator').on('click', operatorSelect);
+      $('.submit').on('click', onSubmit);
+      $('.clear').on('click', onClear);
+
 }
 
 function operatorSelect() {
@@ -15,4 +18,17 @@ function operatorSelect() {
       console.log(operator); // log the selected operator to check that its right
 } // end operatorSelect
 
+function onSubmit() {
+      console.log('submitting');
+      //code that submits the inputs & operator to server
+      //POST
 
+            //code that refreshes DOM by showing the
+            //calculated value and historical equations
+}
+
+function onClear() {
+      console.log('clearing');
+      //code that clears the inputs, operator, and history
+      //POST
+}
