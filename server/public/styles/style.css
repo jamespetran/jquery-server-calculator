@@ -1,5 +1,15 @@
 #calculator {
       font-size: larger;
+      align-items: center;
+      text-align: center;
+      margin: 0 auto;
+      padding-bottom: 1px;
+
+}
+#answer {
+      padding-top: 10px;
+      margin: 0;
+      padding-bottom: 0px;
 }
 
 h1 {

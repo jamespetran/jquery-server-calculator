@@ -14,6 +14,7 @@ function onReady() {
       $('.submit').on('click', onSubmit);
       $('.clear').on('click', onClear);
       $('#historyButton').on('click', getHistory);
+      // getHistory(); // refresh DOM on page load
 
 }
 
@@ -41,9 +42,24 @@ function onSubmit() {
       submission.secondNum = $('#secondNumber').val();
 
 
+
       //code that submits the inputs & operator to server
       //POST submission
       // endpoint: /calculate
+      $.ajax({
+            type: 'POST',
+            url: '/calculate',
+            data: submission
+      }).then( (response)=> {
+            clearInputs();
+            getHistory();
+      }).catch( (err) => {
+            alert( 'Error submitting calculation. Try again later.' );
+            console.log( err );
+     
+      })
+
+
 
       //code that refreshes DOM by showing the
       //calculated value and historical equations
@@ -52,24 +68,18 @@ function onSubmit() {
 
 function onClear() {
       console.log('clearing');
-      //code that clears the inputs, operator, and history
-      $('#calculator button').removeClass("selected"); //clear selected operator
-      $('#firstNumber').val('');
-      $('#secondNumber').val('');
-      operator = '';
-      submission.firstNum = '';
-      submission.secondNum = '';
-      submission.operator = ''; // zeroing out the storage inputs & submission object
-      $('#history').text(''); // blanking out the historical display of equations
-
 
       //POST to clear history
-
+/******************************** need to add a post thing here */
       // endpoint: /clear
 
-      //code that refreshes DOM by showing the
-      //calculated value and historical equations
       getHistory();
+
+      clearInputs();
+
+      // clear outputs 
+      $('#history').text(''); // blanking out the historical display of equations
+      $('#answer').text(''); // blanking out the latest answer
 
 }
 
@@ -102,20 +112,37 @@ function getHistory() {
       $.ajax({
             type: 'GET',
             url: '/history'
-      }).then((calculations) => {
+      }).then((response) => {
             let history = $('#history');
             history.empty();
+
+            //append to DOM
+            let calculations = response.history;
             for (let i = 0; i < calculations.length; i++) {
                   let calculation = calculations[i];
                   history.append(`
                   <p class="calculation" data-index="${i}">
-                  <span>${calculation.input}</span>
+                  <span>${i.input}</span>
                   = ${calculation.result}</p>`)
             } // end for
+
+            // append latest answer to DOM
+            $('#answer').text(calculations[calculations.length-1].result);
       }).catch((err) => {
-            alert('Unable to get messages. Try again later.');
+            alert('Unable to get calculations. Try again later.');
             console.log(err);
       })
 
+
+}
+
+function clearInputs() {
+      $('#calculator button').removeClass("selected"); //clear selected operator
+      $('#firstNumber').val('');
+      $('#secondNumber').val('');
+      operator = '';
+      submission.firstNum = '';
+      submission.secondNum = '';
+      submission.operator = ''; // zeroing out the storage inputs & submission object
 
 }
