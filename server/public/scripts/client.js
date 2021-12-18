@@ -30,7 +30,7 @@ function operatorSelect() {
             multiply();
       } else if (operator === "÷") {
             divide();
-      } else {console.log("something went wrong");}
+      } else { console.log("something went wrong"); }
       return;
 
 } // end operatorSelect
@@ -40,13 +40,13 @@ function onSubmit() {
       submission.firstNum = $('#firstNumber').val();
       submission.secondNum = $('#secondNumber').val();
 
-      
+
       //code that submits the inputs & operator to server
       //POST submission
       // endpoint: /calculate
 
-            //code that refreshes DOM by showing the
-            //calculated value and historical equations
+      //code that refreshes DOM by showing the
+      //calculated value and historical equations
       getHistory();
 }
 
@@ -57,38 +57,39 @@ function onClear() {
       $('#firstNumber').val('');
       $('#secondNumber').val('');
       operator = '';
-      submission.firstNum='';
-      submission.secondNum='';
-      submission.operator=''; // zeroing out the storage inputs & submission object
+      submission.firstNum = '';
+      submission.secondNum = '';
+      submission.operator = ''; // zeroing out the storage inputs & submission object
       $('#history').text(''); // blanking out the historical display of equations
 
 
       //POST to clear history
+
       // endpoint: /clear
-      
-            //code that refreshes DOM by showing the
-            //calculated value and historical equations
+
+      //code that refreshes DOM by showing the
+      //calculated value and historical equations
       getHistory();
 
 }
 
 function plus() {
-      let operator="plus";
+      let operator = "plus";
       console.log(operator);
       submission.operator = operator;
 }
 function minus() {
-      let operator="minus";
+      let operator = "minus";
       console.log(operator);
       submission.operator = operator;
 }
 function multiply() {
-      let operator="multiply";
+      let operator = "multiply";
       console.log(operator);
       submission.operator = operator;
 }
 function divide() {
-      let operator="divide";
+      let operator = "divide";
       console.log(operator);
       submission.operator = operator;
 }
@@ -98,5 +99,23 @@ function getHistory() {
       //ajax that GETs history from server
       // endpoint: /history
       //and appends to DOM
+      $.ajax({
+            type: 'GET',
+            url: '/history'
+      }).then((calculations) => {
+            let history = $('#history');
+            history.empty();
+            for (let i = 0; i < calculations.length; i++) {
+                  let calculation = calculations[i];
+                  history.append(`
+                  <p class="calculation" data-index="${i}">
+                  <span>${calculation.input}</span>
+                  = ${calculation.result}</p>`)
+            } // end for
+      }).catch((err) => {
+            alert('Unable to get messages. Try again later.');
+            console.log(err);
+      })
+
 
 }

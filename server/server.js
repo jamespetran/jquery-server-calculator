@@ -8,3 +8,8 @@ const port = 5000;
 app.listen( port, ()=>{
    console.log( 'server up on:', port );
 }) //end server up
+
+// end points & routing
+app.get( '/history', ( req, res )=>{
+   console.log( 'in /history GET' );
+   res.send( calculations );

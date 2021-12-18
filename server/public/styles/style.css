@@ -15,7 +15,16 @@ div {
       align-items: center;
       text-align: center;
 }
-body {
-      background-image: url("/server/public/images/calculator.jpg");
-      background-repeat: repeat;
+body::after {
+      content: "";
+      background: url("../images/calculator.jpg");
+      background-size : 100% auto;
+      opacity: 0.04;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      z-index: -1;   
+    
 }
