@@ -26,7 +26,7 @@ let receivedInputs = {}
 app.post('/calculate', (req, res) => {
    console.log('in /calculate POST:', req.body);
    receivedInputs = req.body;
-   let operator = receivedValues.operator;
+   let operator = receivedInputs.operator;
    if ( operator === 'plus'){
       plus();
    } else if (operator === 'minus') {
@@ -44,15 +44,16 @@ app.post('/calculate', (req, res) => {
 
 function plus() {
    let string =
-      receivedInputs.firstNumber + 
+      receivedInputs.firstNum + 
       "+" + 
-      receivedInputs.secondNumber;
+      receivedInputs.secondNum;
    let answer =
-      Number(receivedInputs.firstNumber)+ 
-      Number(receivedInputs.secondNumber);
+      Number(receivedInputs.firstNum)+ 
+      Number(receivedInputs.secondNum);
    let equation = {
       input: string,
       result: answer
    };
    calculations.history.push(equation);
+   console.log(calculations.history[calculations.history.length-1]);
 }
