@@ -5,7 +5,7 @@ app.use(express.static('server/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const port = 5000;
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
    console.log('server up on:', port);
 }) //end server up
 
@@ -109,3 +109,17 @@ function divide() {
    calculations.history.push(equation);
    console.log(calculations.history[calculations.history.length-1]);
 }
+
+app.delete('/individual', (req,res) => {
+   console.log('individual clear request received');
+   // calculations = {
+   //    history: [],
+   // };
+   let index = req.body.index; //access index property
+   // console.log(index);
+   console.log(calculations.history); //log before
+   calculations.history.splice(index,1); //remove item from array   
+   console.log(calculations.history); //log after
+
+   res.sendStatus(204); //send status
+}); //end history DELETE

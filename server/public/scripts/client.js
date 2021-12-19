@@ -151,10 +151,12 @@ function getHistory() {
                   ` = ` +
                   calculations[calculations.length - 1].result
             );
+
       }).catch((err) => {
             alert('Unable to get calculations. Try again later.');
             console.log(err);
       })
+      
 
 
 }
@@ -247,9 +249,10 @@ function onDelete() {
 }
 
 function onKillHistory() {
-      console.log('deleting this one:');
-      let index = $(this).data('index');
-      console.log(index);
+      let index = { 
+            index: $(this).data('index')
+      };
+      console.log('deleting this one:',index);
       $.ajax({
             type: 'DELETE',
             url: '/individual',
@@ -257,9 +260,9 @@ function onKillHistory() {
       }).then(() => {
             getHistory();
             $('#answer').text('Enter your equation above')
-            console.log('history cleared');
+            console.log('item cleared');
       }).catch((err) => {
-            alert('Error clearing history. Try again later.');
+            alert('Error clearing item. Try again later.');
             console.log(err);
       })
 }
