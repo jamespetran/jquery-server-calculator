@@ -7,6 +7,7 @@ let submission = {
       operator: '',
       secondNum: '',
 }
+let display=""; // for displaying the calculator input
 
 function onReady() {
       console.log('jq');
