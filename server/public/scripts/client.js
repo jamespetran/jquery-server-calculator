@@ -73,14 +73,12 @@ function onClear() {
 /******************************** need to add a post thing here */
       // endpoint: /clear
 
-      getHistory();
-
+      // getHistory()
       clearInputs();
 
       // clear outputs 
-      $('#history').text(''); // blanking out the historical display of equations
-      $('#answer').text(''); // blanking out the latest answer
-
+      $('#history').empty(); // blanking out the historical display of equations
+      $('#answer').empty(); // blanking out the latest answer
 }
 
 function plus() {
@@ -122,12 +120,16 @@ function getHistory() {
                   let calculation = calculations[i];
                   history.append(`
                   <p class="calculation" data-index="${i}">
-                  <span>${i.input}</span>
+                  <span>${calculation.input}</span>
                   = ${calculation.result}</p>`)
             } // end for
 
             // append latest answer to DOM
-            $('#answer').text(calculations[calculations.length-1].result);
+            $('#answer').text(
+                  calculations[calculations.length-1].input +
+                  ` = ` +
+                  calculations[calculations.length-1].result
+                  );
       }).catch((err) => {
             alert('Unable to get calculations. Try again later.');
             console.log(err);
@@ -144,5 +146,7 @@ function clearInputs() {
       submission.firstNum = '';
       submission.secondNum = '';
       submission.operator = ''; // zeroing out the storage inputs & submission object
+
+
 
 }

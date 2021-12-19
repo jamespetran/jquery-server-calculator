@@ -18,10 +18,10 @@ let receivedInputs = {}
 
 
 // // end points & routing
-// app.get('/history', (req, res) => {
-//    console.log('in /history GET');
-//    res.send(calculations);
-// }// end GET history
+app.get('/history', (req, res) => {
+   console.log('in /history GET');
+   res.send(calculations);
+});// end GET history
 
 app.post('/calculate', (req, res) => {
    console.log('in /calculate POST:', req.body);
@@ -49,6 +49,52 @@ function plus() {
       receivedInputs.secondNum;
    let answer =
       Number(receivedInputs.firstNum)+ 
+      Number(receivedInputs.secondNum);
+   let equation = {
+      input: string,
+      result: answer
+   };
+   calculations.history.push(equation);
+   console.log(calculations.history[calculations.history.length-1]);
+}
+
+function minus() {
+   let string =
+      receivedInputs.firstNum + 
+      "-" + 
+      receivedInputs.secondNum;
+   let answer =
+      Number(receivedInputs.firstNum)-
+      Number(receivedInputs.secondNum);
+   let equation = {
+      input: string,
+      result: answer
+   };
+   calculations.history.push(equation);
+   console.log(calculations.history[calculations.history.length-1]);
+}
+function multiply() {
+   let string =
+      receivedInputs.firstNum + 
+      "*" + 
+      receivedInputs.secondNum;
+   let answer =
+      Number(receivedInputs.firstNum)*
+      Number(receivedInputs.secondNum);
+   let equation = {
+      input: string,
+      result: answer
+   };
+   calculations.history.push(equation);
+   console.log(calculations.history[calculations.history.length-1]);
+}
+function divide() {
+   let string =
+      receivedInputs.firstNum + 
+      "/" + 
+      receivedInputs.secondNum;
+   let answer =
+      Number(receivedInputs.firstNum)/
       Number(receivedInputs.secondNum);
    let equation = {
       input: string,
