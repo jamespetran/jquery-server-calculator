@@ -14,15 +14,21 @@ let display = ""; // for displaying the calculator input
 
 function onReady() {
       console.log('jq');
-      // $('.operator').on('click', operatorSelect);
-      $('.submit').on('click', onSubmit);
-      $('.clear').on('click', onClear);
-      $('#historyButton').on('click', getHistory);
-      // getHistory(); // refresh DOM on page load
-      $('#input-buttons .inputDisplay').on('click', displayInputs)
+
+      getHistory(); // refresh DOM on page load
+
+      // event handlers
+      $('.submit').on('click', onSubmit); //make the equals sign work
+      $('.clear').on('click', onClear); // clear display and DOM
+      $('#historyButton').on('click', getHistory); //get calculator history
+      $('#input-buttons .inputDisplay').on('click', displayInputs); // make calculator display work
+      // clear server history
 }
 
 function operatorSelect(operator) {
+      // once you put the operator in, the first number is complete
+      submission.firstNum = submission.input.join(''); 
+      console.log('first number is',submission.firstNum);
       if (operator === "+") {
             plus();
       } else if (operator === "-") {
@@ -54,10 +60,22 @@ function divide() {
 }
 
 function onSubmit() {
-      console.log('submitting');
-      submission.firstNum = $('#firstNumber').val();
-      submission.secondNum = $('#secondNumber').val();
+      console.log('submitting',submission.input);
+      // submission.firstNum = $('#firstNumber').val();
+      // submission.secondNum = $('#secondNumber').val();
+      submission.secondNum = 
+            submission.input //total input in array form
+                  .slice(submission.firstNum.length+1) // starting at X index
+                  .join('');  // and turned into a string
 
+      console.log('the second number is', submission.secondNum);
+
+      if (submission.firstNum === '' || 
+            submission.secondNum === '' ||
+            submission.operator === '') {
+                  alert('Needs 2 numbers separated by an operator to submit');
+                  return;
+            }
 
 
       //code that submits the inputs & operator to server
@@ -109,12 +127,15 @@ function getHistory() {
       }).then((response) => {
             let history = $('#history');
             history.empty();
-
+            console.log(response.history);
+            if ( response.history.length === 0) {
+                  return //if there is no history, (like after server restarts...) then return
+            }
             //append to DOM
             let calculations = response.history;
             for (let i = 0; i < calculations.length; i++) {
                   let calculation = calculations[i];
-                  history.append(`
+                  history.prepend(`
                   <p class="calculation" data-index="${i}">
                   <span>${calculation.input}</span>
                   = ${calculation.result}</p>`)
@@ -160,6 +181,7 @@ function displayInputs() {
                         submission.input.pop(); // removes previous operator
                         operatorSelect(inputted); // assigns operator to object
                         prevOperator = true;
+                        hasOperator = true; // sets true hasOperator flag
 
                   } else { //if trying to enter 2 operators...ergo 3 numbers... cannot process 
                         alert("This calculator can only handle two numbers for now! sorry!")
@@ -172,10 +194,10 @@ function displayInputs() {
                   hasOperator = true; // sets true hasOperator flag
                   prevOperator = true;
             }
-      } else { //if not an operator, the set flag for not an operator
+      } else { //if button pushed is not an operator
             prevOperator = false;
       }
       submission.input.push(inputted);
-      console.log(submission.input);
+      // console.log(submission.input);
       $('#display').val(submission.input.join(''));
 }
