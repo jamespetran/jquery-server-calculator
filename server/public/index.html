@@ -44,8 +44,9 @@
             <!-- new section for testing the calculator -->
             <input 
                   type="text"
-                  disabled
                   id="display"
+                  onkeydown="return false"
+                  value=""
             />
             <button class="clear" id="clear">C</button>
 
@@ -53,83 +54,83 @@
                   <tr>
                         <td>
                               <button 
-                                    class="calcButton" 
+                                    class="calcButton inputDisplay" 
                                     id="seven"
                               >7</button>
                         </td>
                         <td>
                               <button 
-                                    class="calcButton" 
+                                    class="calcButton inputDisplay" 
                                     id="eight"
                               >8</button>
                         </td>
                         <td>
                               <button 
-                                    class="calcButton" 
+                                    class="calcButton inputDisplay" 
                                     id="nine"
                               >9</button>
                         </td>
                         <td>
-                              <button class="operator calcButton" id="plus">+</button>
+                              <button class="operator calcButton inputDisplay" id="plus">+</button>
                         </td>
 
                   </tr>
                   <tr>
                         <td>
                               <button 
-                                    class="calcButton" 
+                                    class="calcButton inputDisplay" 
                                     id="four"
                               >4</button>
                         </td>
                         <td>
                               <button 
-                                    class="calcButton" 
+                                    class="calcButton inputDisplay" 
                                     id="five"
                               >5</button>
                         </td>
                         <td>
                               <button 
-                                    class="calcButton" 
+                                    class="calcButton inputDisplay" 
                                     id="six"
                               >6</button>
                         </td>
                         <td>
-                              <button class="operator calcButton" id="minus">-</button>
+                              <button class="operator calcButton inputDisplay" id="minus">-</button>
                         </td>
                   </tr>
                   <tr>
                         <td>
                               <button 
-                                    class="calcButton" 
+                                    class="calcButton inputDisplay" 
                                     id="one"
                               >1</button>
                         </td>
                         <td>
                               <button 
-                                    class="calcButton" 
+                                    class="calcButton inputDisplay" 
                                     id="two"
                               >2</button>
                         </td>
                         <td>
                               <button 
-                                    class="calcButton" 
+                                    class="calcButton inputDisplay" 
                                     id="three"
                               >3</button>
                         </td>
                         <td>
-                              <button class="operator calcButton" id="multiply">X</button>
+                              <button class="operator calcButton inputDisplay" id="multiply">X</button>
                         </td>
                   </tr>
                   <tr>
                         <td>
                               <button 
-                                    class="calcButton" 
+                                    class="calcButton inputDisplay" 
                                     id="zero"
                               >0</button>
                         </td>
                         <td>
                               <button 
-                                    class="calcButton" 
+                                    class="calcButton inputDisplay" 
                                     id="decimal"
                               >.</button>
                         </td>
@@ -142,7 +143,7 @@
                               >=</button>
                         </td>
                         <td>
-                              <button class="operator calcButton" id="divide">÷</button>
+                              <button class="operator calcButton inputDisplay" id="divide">÷</button>
                         </td>
                   </tr>
             </table>
