@@ -1,9 +1,5 @@
-# Project Name
-
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
-
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+Persistent server-powered calculator, now with interactive buttons.
 
-Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
+There are two branches. #Master has a more basic calculator, while #stretch is a more advanced calculator. The #stretch calculator is running and deployed on heroku at https://jp-jquery-server-calculator.herokuapp.com/
