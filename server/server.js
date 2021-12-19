@@ -38,9 +38,15 @@ app.post('/calculate', (req, res) => {
    }
 
    res.sendStatus(200);
-}) // end messages POST
+}); // end messages POST
 
-
+app.delete('/history', (req,res) => {
+   console.log('history clear request received');
+   calculations = {
+      history: [],
+   };
+   res.sendStatus(204);
+}); //end history DELETE
 
 function plus() {
    let string =
