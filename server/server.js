@@ -4,7 +4,12 @@ const app = express();
 app.use(express.static('server/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+console.log('my favorite food is', process.env.MY_FAVORITE_FOOD);
+
 const port = 5000;
+
+// listen to whatever port heroku wants us to listen to
+// otherwise use 5000
 app.listen(process.env.PORT || port, () => {
    console.log('server up on:', port);
 }) //end server up
